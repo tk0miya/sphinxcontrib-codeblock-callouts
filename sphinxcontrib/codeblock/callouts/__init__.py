@@ -3,6 +3,7 @@ sphinxcontrib.codeblock.callouts
 """
 
 import re
+from pathlib import Path
 from typing import List
 
 from docutils import nodes
@@ -13,6 +14,7 @@ from sphinx.highlighting import PygmentsBridge
 from sphinx.locale import __
 from sphinx.util import logging
 from sphinx.util.docutils import SphinxDirective
+from sphinx.util.fileutil import copy_asset_file
 
 
 logger = logging.getLogger(__name__)
@@ -59,8 +61,17 @@ class CodeBlockCalloutsHtmlFormatter(HtmlFormatter):
                 yield token
 
 
+def copy_static_file(app, exc):
+   if app.builder.format == 'html' and not exc:
+       staticdir = Path(app.builder.outdir) / '_static'
+       css = Path(__file__).parent / 'static/codeblock-callouts.css'
+       copy_asset_file(str(css), str(staticdir))
+
+
 def setup(app):
+    app.add_css_file('codeblock-callouts.css')
     app.add_directive('code-block-callouts', CodeBlockCalloutsDirective)
+    app.connect('build-finished', copy_static_file)
     PygmentsBridge.html_formatter = CodeBlockCalloutsHtmlFormatter
 
     return {

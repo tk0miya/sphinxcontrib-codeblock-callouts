@@ -1,0 +1,53 @@
+ol.code-block-callouts {
+  counter-reset: my-counter;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ol.code-block-callouts > li {
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: 30px;
+  position: relative;
+}
+
+ol.code-block-callouts > li:before {
+  content: counter(my-counter);
+  counter-increment: my-counter;
+  background-color: #333;
+  border: 1px solid;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 22px;
+  width: 22px;
+  color: #ffffff;
+  font-size: 85%;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+span.code-block-callouts {
+  height: 22px;
+  line-height: 22px;
+  width: 22px;
+  text-align: center;
+}
+
+span.code-block-callouts > span {
+  background-color: #333;
+  border: 1px solid;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  height: 22px;
+  width: 22px;
+  color: #ffffff;
+  font-size: 85%;
+}
