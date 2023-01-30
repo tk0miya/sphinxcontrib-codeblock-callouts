@@ -27,7 +27,7 @@ class CodeBlockCalloutsDirective(SphinxDirective):
         node = nodes.container()
         node.document = self.state.document
         self.state.nested_parse(self.content, self.content_offset, node)
-        if len(node.children) != 1 or not isinstance(node.children[0], nodes.enumerated_list):
+        if len(node.children) == 0 or not isinstance(node.children[0], nodes.enumerated_list):
             logger.warning(__('The content of code-block-callouts should be an enumerated list'),
                            location=(self.env.docname, self.lineno))
             return []
@@ -50,7 +50,7 @@ class CodeBlockCalloutsHtmlFormatter(HtmlFormatter):
     def new_tokens(self, tokensource):
         for token in tokensource:
             if token[0] == Comment.Single:
-                matched = re.match(r'# (\d+)', token[1])
+                matched = re.match(r'(?:#|//)\s+(\d+)', token[1])
                 if matched:
                     # replace a callout comment token by Comment.Callout token
                     yield (Comment.Callout, matched[1])
