@@ -24,18 +24,14 @@ Syntax
 
 Write callout numbers as comments into your source code::
 
-```
-.. code-block:: python
+    .. code-block:: python
 
-   def hello():  # 1
-       return 'world'  # 2
-```
+       def hello():  # 1
+           return 'world'  # 2
 
 Addition to this, you can write callout texts via `code-block-callouts` directive::
 
-```
-.. code-block-callouts::
+    .. code-block-callouts::
 
-   1. Definition of the "hello" function
-   2. It will return a string "world" as a return value
-```
+       1. Definition of the "hello" function
+       2. It will return a string "world" as a return value
